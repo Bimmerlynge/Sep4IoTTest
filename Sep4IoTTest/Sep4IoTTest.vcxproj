@@ -38,7 +38,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\4SepIoT\src\tempHumSensor.c" />
     <ClCompile Include="..\..\GoogleTestDemo\VIAFreeRTOSTest\FreeRTOS_FFF_MocksDefinitions.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="tempHumSensorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,1 +1,2 @@
 C:\SEP4\Sep4IoTTest\Sep4IoTTest\Debug\Sep4IoTTest.vcxproj.CopyComplete
+C:\SEP4\Sep4IoTTest2\Sep4IoTTest\Debug\Sep4IoTTest.vcxproj.CopyComplete
