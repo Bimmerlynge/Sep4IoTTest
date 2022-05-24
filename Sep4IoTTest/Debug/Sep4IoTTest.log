@@ -1,6 +1,0 @@
-﻿  tempHumSensorTest.cpp
-C:\SEP4\Sep4IoTTest2\Sep4IoTTest\tempHumSensorTest.cpp(153,29): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\SEP4\Sep4IoTTest2\Sep4IoTTest\tempHumSensorTest.cpp(174,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\SEP4\Sep4IoTTest2\Sep4IoTTest\tempHumSensorTest.cpp(258,29): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\SEP4\Sep4IoTTest2\Sep4IoTTest\tempHumSensorTest.cpp(279,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Sep4IoTTest.vcxproj -> C:\SEP4\Sep4IoTTest2\Debug\Sep4IoTTest.exe
