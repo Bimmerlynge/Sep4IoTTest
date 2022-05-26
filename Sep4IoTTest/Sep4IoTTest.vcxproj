@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="..\..\GoogleTestDemo\VIAFreeRTOSTest\FreeRTOS_FFF_MocksDefinitions.cpp" />
+    <ClCompile Include="terrariumTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
