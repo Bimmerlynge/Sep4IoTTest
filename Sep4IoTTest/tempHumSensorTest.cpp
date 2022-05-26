@@ -20,14 +20,7 @@ FAKE_VOID_FUNC(updateTerrariumHumidity, float);
 class TempHumSensorTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        RESET_FAKE(vTaskDelay);
-        RESET_FAKE(hih8120_wakeup);
-        RESET_FAKE(hih8120_getTemperature);
-        RESET_FAKE(hih8120_getHumidity);
-        RESET_FAKE(hih8120_measure);
-        RESET_FAKE(updateTerrariumHumidity);
-        RESET_FAKE(updateTerrariumTemperature);
-        FFF_RESET_HISTORY();
+        
     }
     void TearDown() override {
         RESET_FAKE(vTaskDelay);
