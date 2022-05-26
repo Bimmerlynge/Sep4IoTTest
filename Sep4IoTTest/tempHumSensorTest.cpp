@@ -192,7 +192,7 @@ TEST_F(TempHumSensorTest, TestIfTaskDelayParam) {
     //Arrange
     int ticks1 = 100;
     int ticks2 = 5;
-    int ticks3 = 500;
+    int ticks3 = pdMS_TO_TICKS(10000);
     //Act
     tempHumSensorRun();
     //Assert/Except
