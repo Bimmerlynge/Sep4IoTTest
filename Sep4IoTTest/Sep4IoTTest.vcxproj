@@ -36,7 +36,9 @@
     <IncludePath>C:\SEP4\4SepIoT\src;C:\SEP4\fff;C:\SEP4\GoogleTestDemo\VIAFreeRTOSTest;C:\SEP4\4SepIoT\drivers;.;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\4SepIoT\src\lorawanDownlinkHandler.c" />
     <ClCompile Include="..\..\GoogleTestDemo\VIAFreeRTOSTest\FreeRTOS_FFF_MocksDefinitions.cpp" />
+    <ClCompile Include="lorawamDownlinkHandlerTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
