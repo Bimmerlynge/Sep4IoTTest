@@ -36,12 +36,8 @@
     <IncludePath>C:\SEP4\4SepIoT\src;C:\SEP4\fff;C:\SEP4\GoogleTestDemo\VIAFreeRTOSTest;C:\SEP4\4SepIoT\drivers;.;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\4SepIoT\src\co2Sensor.c" />
-    <ClCompile Include="..\..\4SepIoT\src\tempHumSensor.c" />
     <ClCompile Include="..\..\4SepIoT\src\terrarium.c" />
     <ClCompile Include="..\..\GoogleTestDemo\VIAFreeRTOSTest\FreeRTOS_FFF_MocksDefinitions.cpp" />
-    <ClCompile Include="co2SensorTest.cpp" />
-    <ClCompile Include="tempHumSensorTest.cpp" />
     <ClCompile Include="terrariumTest.cpp" />
   </ItemGroup>
   <ItemGroup>

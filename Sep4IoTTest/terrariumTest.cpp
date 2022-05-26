@@ -3,10 +3,14 @@
 #include <FreeRTOS_FFF_MocksDeclaration.h>
 
 extern "C" {
-
-
 #include <terrarium.h>
+#include <servomotor.h>
+#include "portable.h"
+
 }
+
+//FAKE_VOID_FUNC(feedAnimalTerrarium);
+FAKE_VOID_FUNC(rotate180Servo);
 
 class TerrariumTest : public ::testing::Test {
 protected:
@@ -19,10 +23,8 @@ TEST_F(TerrariumTest, TestInitCreatesSemaphore) {
 	//Arrange
 
 	//Act
-	initTerrarium();
+	
 	//Assert/Except
-
-
 
 }
 
