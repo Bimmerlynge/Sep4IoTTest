@@ -11,6 +11,7 @@ extern "C" {
 
 //FAKE_VOID_FUNC(feedAnimalTerrarium);
 FAKE_VOID_FUNC(rotate180Servo);
+FAKE_VALUE_FUNC(void*, pvPortMalloc, size_t);
 
 class TerrariumTest : public ::testing::Test {
 protected:
