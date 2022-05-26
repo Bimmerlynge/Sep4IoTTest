@@ -40,6 +40,8 @@ TEST_F(LoRaWANDownlinkHandlerTest, TestDownLinkMessageBufferIsCalledOnce) {
     //Arrange
 
     //Act
+    MessageBufferHandle_t downLinkMessageBuffer = xMessageBufferCreate(sizeof(lora_driver_payload_t) * 2);
+    init_downlink_handler(downLinkMessageBuffer);
     loraDownlinkRun();
 
     //Assert/Except
