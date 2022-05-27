@@ -46,6 +46,7 @@
   <ItemGroup>
     <ClInclude Include="ATMEGA_FreeRTOS.h" />
     <ClInclude Include="portable.h" />
+    <ClInclude Include="taskMock.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

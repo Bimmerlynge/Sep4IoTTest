@@ -24,10 +24,20 @@ FAKE_VALUE_FUNC(int16_t, getTerrariumTemp, Terrariumdata_p);
 FAKE_VALUE_FUNC(int16_t, getTerrariumHum, Terrariumdata_p);
 FAKE_VALUE_FUNC(uint16_t, getTerrariumCO2, Terrariumdata_p);
 FAKE_VALUE_FUNC(int8_t, getTerrariumIsFed, Terrariumdata_p);
+FAKE_VALUE_FUNC(uint16_t, getTerrariumLight, Terrariumdata_p);
 FAKE_VALUE_FUNC(lora_driver_returnCode_t, lora_driver_sendUploadMessage, bool, lora_driver_payload_t*);
-//FAKE_VALUE_FUNC(int, taskYIELD);
+FAKE_VALUE_FUNC(int, taskYIELD);
 //FAKE_VALUE_FUNC(TickType_t, xTaskGetTickCount);
 
+typedef struct Terrariumdata {
+    int16_t  temperature;
+    int16_t  humidity;
+    uint16_t  co2;
+    int8_t isFed;
+    uint16_t light;
+} Terrariumdata;
+
+Terrariumdata_p terrariumdata_p = (Terrariumdata_p)malloc(sizeof(Terrariumdata));
 
 class LoraWANHandlerTest : public ::testing::Test {
 protected:
@@ -58,15 +68,180 @@ protected:
     }
 };
 
-#pragma region LoraDriverTests
-
-TEST_F(LoraWANHandlerTest, TestIfGetRnIsCalledOnce) {
-    //Arange
-    
+#pragma region TaskDelayTests
+TEST_F(LoraWANHandlerTest, TestIfTaskDelayIsCalledOnce) {
+    //Arrange
     //Act
-    _lora_setup();
+    loraHandlerRun();
     //Assert/Expect
-    EXPECT_EQ(1, lora_driver_getRn2483Hweui_fake.call_count);
+    EXPECT_EQ(1, vTaskDelay_fake.call_count);
 }
 
+TEST_F(LoraWANHandlerTest, TestTaskDelayParam) {
+    //Arrange
+    int ticks = pdMS_TO_TICKS(300000);
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(ticks, vTaskDelay_fake.arg0_val);
+}
+#pragma endregion
+
+#pragma region TerrariumDataTests
+TEST_F(LoraWANHandlerTest, TestIfPrepareTerrariumDataIsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, prepareTerrariumData_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestPrepareTerrariumDataReturnVal) {
+    //Arrange
+    prepareTerrariumData_fake.return_val = terrariumdata_p;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(terrariumdata_p, prepareTerrariumData_fake.return_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestIfGetTempIsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, getTerrariumTemp_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetTempParam) {
+    //Arrange
+    
+    getTerrariumTemp_fake.arg0_val = terrariumdata_p;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(terrariumdata_p, getTerrariumTemp_fake.arg0_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetTempReturnVal) {
+    //Arrange
+    int16_t temp = 20;
+    getTerrariumTemp_fake.return_val = temp;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(temp, getTerrariumTemp_fake.return_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestIfGetHumIsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, getTerrariumHum_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetHumParam) {
+    //Arrange
+
+    getTerrariumHum_fake.arg0_val = terrariumdata_p;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(terrariumdata_p, getTerrariumHum_fake.arg0_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetHumReturnVal) {
+    //Arrange
+    int16_t hum = 41;
+    getTerrariumHum_fake.return_val = hum;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(hum, getTerrariumHum_fake.return_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestIfGetCo2IsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, getTerrariumCO2_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetCo2Param) {
+    //Arrange
+
+    getTerrariumCO2_fake.arg0_val = terrariumdata_p;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(terrariumdata_p, getTerrariumCO2_fake.arg0_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetCO2ReturnVal) {
+    //Arrange
+    uint16_t CO2 = 433;
+    getTerrariumCO2_fake.return_val = CO2;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(CO2, getTerrariumCO2_fake.return_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestIfGetIsFedIsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, getTerrariumIsFed_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetIsFedParam) {
+    //Arrange
+
+    getTerrariumIsFed_fake.arg0_val = terrariumdata_p;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(terrariumdata_p, getTerrariumIsFed_fake.arg0_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetIsFedReturnVal) {
+    //Arrange
+    int8_t IsFed = 1;
+    getTerrariumIsFed_fake.return_val = IsFed;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(IsFed, getTerrariumIsFed_fake.return_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestIfGetLightIsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, getTerrariumLight_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetLightParam) {
+    //Arrange
+
+    getTerrariumLight_fake.arg0_val = terrariumdata_p;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(terrariumdata_p, getTerrariumLight_fake.arg0_val);
+}
+
+TEST_F(LoraWANHandlerTest, TestGetLightReturnVal) {
+    //Arrange
+    uint16_t light = 1;
+    getTerrariumLight_fake.return_val = light;
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(light, getTerrariumLight_fake.return_val);
+}
 #pragma endregion
