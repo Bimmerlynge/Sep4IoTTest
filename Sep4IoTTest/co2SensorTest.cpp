@@ -12,6 +12,7 @@ FAKE_VALUE_FUNC(void*, pvPortMalloc, size_t);
 FAKE_VOID_FUNC(updateTerrariumCO2, uint16_t);
 FAKE_VALUE_FUNC(mh_z19_returnCode_t, mh_z19_takeMeassuring);
 FAKE_VALUE_FUNC(mh_z19_returnCode_t, mh_z19_getCo2Ppm, uint16_t*);
+FAKE_VOID_FUNC(mh_z19_initialise, serial_comPort_t);
 
 
 class CO2SensorTest : public ::testing::Test {
@@ -127,8 +128,8 @@ TEST_F(CO2SensorTest, TestIfTaskDelayIsCalledTwice) {
 
 TEST_F(CO2SensorTest, TestTaskDelayParams) {
 	//Arrange
-	int ticks1 = 100;
-	int ticks2 = pdMS_TO_TICKS(10000);
+	int ticks1 = pdMS_TO_TICKS(10000);
+	int ticks2 = 100;
 	//Act
 	co2SensorRun(ppm_p);
 	//Assert/Except
