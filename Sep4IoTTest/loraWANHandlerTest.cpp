@@ -27,7 +27,6 @@ FAKE_VALUE_FUNC(int8_t, getTerrariumIsFed, Terrariumdata_p);
 FAKE_VALUE_FUNC(uint16_t, getTerrariumLight, Terrariumdata_p);
 FAKE_VALUE_FUNC(lora_driver_returnCode_t, lora_driver_sendUploadMessage, bool, lora_driver_payload_t*);
 FAKE_VALUE_FUNC(int, taskYIELD);
-//FAKE_VALUE_FUNC(TickType_t, xTaskGetTickCount);
 
 typedef struct Terrariumdata {
     int16_t  temperature;
@@ -59,10 +58,11 @@ protected:
         RESET_FAKE(lora_driver_getRn2483Hweui);
         RESET_FAKE(lora_driver_flushBuffers);
         RESET_FAKE(prepareTerrariumData);
-        RESET_FAKE(getTerrariumTemp);
+        /*RESET_FAKE(getTerrariumTemp);
         RESET_FAKE(getTerrariumHum);
         RESET_FAKE(getTerrariumCO2);
         RESET_FAKE(getTerrariumIsFed);
+        RESET_FAKE(getTerrariumLight);*/
         RESET_FAKE(lora_driver_sendUploadMessage);
         FFF_RESET_HISTORY();
     }
@@ -190,6 +190,14 @@ TEST_F(LoraWANHandlerTest, TestGetCO2ReturnVal) {
 }
 
 TEST_F(LoraWANHandlerTest, TestIfGetIsFedIsCalledOnce) {
+    //Arrange
+    //Act
+    loraHandlerRun();
+    //Assert/Expect
+    EXPECT_EQ(1, getTerrariumIsFed_fake.call_count);
+}
+
+TEST_F(LoraWANHandlerTest, TestIfGetIsFedIsCalledOnce2) {
     //Arrange
     //Act
     loraHandlerRun();
