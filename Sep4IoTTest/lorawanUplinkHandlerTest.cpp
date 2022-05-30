@@ -41,9 +41,6 @@ Terrariumdata_p terrariumdata_p = (Terrariumdata_p)malloc(sizeof(Terrariumdata))
 class lorawanUplinkHandlerTest : public ::testing::Test {
 protected:
     void SetUp() override {
-
-    }
-    void TearDown() override {
         RESET_FAKE(vTaskDelay);
         RESET_FAKE(lora_driver_rn2483FactoryReset);
         RESET_FAKE(lora_driver_configureToEu868);
