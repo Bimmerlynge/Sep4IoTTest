@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-
 #include <FreeRTOS_FFF_MocksDeclaration.h>
 
 extern "C" {
@@ -19,9 +18,6 @@ FAKE_VOID_FUNC(updateTerrariumHumidity, float);
 class TempHumSensorTest : public ::testing::Test {
 protected:
     void SetUp() override {
-
-    }
-    void TearDown() override {
         RESET_FAKE(vTaskDelay);
         RESET_FAKE(hih8120_wakeup);
         RESET_FAKE(hih8120_getTemperature);
