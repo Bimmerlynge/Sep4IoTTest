@@ -8,11 +8,11 @@ extern "C" {
 #include <terrarium.h>
 }
 
-FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_wakeup);
-FAKE_VALUE_FUNC(float, hih8120_getTemperature);
-FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_measure);
-FAKE_VALUE_FUNC(float, hih8120_getHumidity);
 FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_wakeup);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_measure);
+FAKE_VALUE_FUNC(float, hih8120_getTemperature);
+FAKE_VALUE_FUNC(float, hih8120_getHumidity);
 FAKE_VOID_FUNC(updateTerrariumTemperature, float);
 FAKE_VOID_FUNC(updateTerrariumHumidity, float);
 
