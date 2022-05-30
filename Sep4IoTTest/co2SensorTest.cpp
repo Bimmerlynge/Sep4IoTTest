@@ -20,9 +20,6 @@ protected:
 	uint16_t ppm = 1;
 	uint16_t* ppm_p = &ppm;
 	void SetUp() override {
-	
-	}
-	void TearDown() override {
 		RESET_FAKE(vTaskDelay);
 		RESET_FAKE(pvPortMalloc);
 		RESET_FAKE(updateTerrariumCO2);
