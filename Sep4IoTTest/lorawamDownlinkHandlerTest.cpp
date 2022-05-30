@@ -18,15 +18,15 @@ class LoRaWANDownlinkHandlerTest : public::testing::Test
 protected:
 
     void SetUp() override {
-        
-    }
-
-    void TearDown() override {
         RESET_FAKE(xMessageBufferReceive);
         RESET_FAKE(vTaskDelay);
         RESET_FAKE(resetAnimalFeeder);
         RESET_FAKE(feedAnimalTerrarium);
         FFF_RESET_HISTORY();
+    }
+
+    void TearDown() override {
+       
     }
 };
 
