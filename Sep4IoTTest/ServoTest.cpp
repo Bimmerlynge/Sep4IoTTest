@@ -8,14 +8,18 @@ extern "C" {
 
 }
 FAKE_VOID_FUNC(rc_servo_setPosition, uint8_t, int8_t);
+FAKE_VOID_FUNC(rc_servo_initialise);
 
 class ServoTest : public ::testing::Test {
 protected:
-	void SetUp() override {}
+	void SetUp() override {
+		RESET_FAKE(rc_servo_setPosition);
+		RESET_FAKE(rc_servo_initialise);
+		FFF_RESET_HISTORY();
+	}
 	void TearDown() override {
 	
-		RESET_FAKE(rc_servo_setPosition);
-		FFF_RESET_HISTORY();
+	
 	}
 };
 
