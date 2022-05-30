@@ -2,6 +2,7 @@
 #include <FreeRTOS_FFF_MocksDeclaration.h>
 
 extern "C" {
+#include "ATMEGA_FreeRTOS.h"
 #include <tempHumSensor.h>
 #include <hih8120.h>
 #include <terrarium.h>
@@ -11,6 +12,7 @@ FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_wakeup);
 FAKE_VALUE_FUNC(float, hih8120_getTemperature);
 FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_measure);
 FAKE_VALUE_FUNC(float, hih8120_getHumidity);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
 FAKE_VOID_FUNC(updateTerrariumTemperature, float);
 FAKE_VOID_FUNC(updateTerrariumHumidity, float);
 
@@ -19,6 +21,7 @@ class TempHumSensorTest : public ::testing::Test {
 protected:
     void SetUp() override {
         RESET_FAKE(vTaskDelay);
+        RESET_FAKE(hih8120_initialise);
         RESET_FAKE(hih8120_wakeup);
         RESET_FAKE(hih8120_getTemperature);
         RESET_FAKE(hih8120_getHumidity);
@@ -185,9 +188,9 @@ TEST_F(TempHumSensorTest, TestIfTaskDelayIsCalled) {
 
 TEST_F(TempHumSensorTest, TestIfTaskDelayParam) {
     //Arrange
-    int ticks1 = 100;
-    int ticks2 = 5;
-    int ticks3 = pdMS_TO_TICKS(10000);
+    int ticks1 = pdMS_TO_TICKS(10000);
+    int ticks2 = 100;
+    int ticks3 = 5;
     //Act
     tempHumSensorRun();
     //Assert/Except
