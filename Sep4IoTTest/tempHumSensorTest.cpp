@@ -59,7 +59,7 @@ TEST_F(TempHumSensorTest, TestWakeupReturnCodeBusy) {
     tempHumSensorRun();
     //Assert/Except
     EXPECT_EQ(HIH8120_TWI_BUSY, hih8120_wakeup_fake.return_val);
-    EXPECT_EQ(hih8120_measure_fake.call_count, 1);
+    EXPECT_EQ(hih8120_measure_fake.call_count, 0);
 }
 
 TEST_F(TempHumSensorTest, TestWakeupReturnCodeOutOfHeap) {
