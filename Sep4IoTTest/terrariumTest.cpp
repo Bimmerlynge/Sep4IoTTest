@@ -18,22 +18,19 @@ SemaphoreHandle_t semaphore = xSemaphoreCreateMutex();
 float testTempValue = 23.6;
 float testHumValue = 72.5;
 uint16_t testCO2Value = 4200;
+float testLightValue = 131.6;
 typedef struct Terrariumdata {
 	int16_t  temperature;
 	int16_t  humidity;
 	uint16_t  co2;
 	int8_t isFed;
-
+	uint16_t light;
 } Terrariumdata;
 
 class TerrariumTest : public ::testing::Test {
 	
 protected:
 	void SetUp() override {
-		
-	}
-	void TearDown() override {
-		resetData();
 		RESET_FAKE(xSemaphoreCreateMutex);
 		RESET_FAKE(rotateFullyLeft);
 		RESET_FAKE(rotateFullyRight);
@@ -41,7 +38,9 @@ protected:
 		RESET_FAKE(xSemaphoreGive);
 		RESET_FAKE(pvPortMalloc);
 		FFF_RESET_HISTORY();
-		
+	}
+	void TearDown() override {
+		resetData();
 	}
 };
 
@@ -309,6 +308,7 @@ TEST_F(TerrariumTest, TestPrepareDataGiveSemaphorCalledOnce) {
 	updateTerrariumTemperature(testTempValue);
 	updateTerrariumHumidity(testHumValue);
 	updateTerrariumCO2(testCO2Value);
+	updateTerrariumLight(testLightValue);
 	RESET_FAKE(xSemaphoreGive);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
@@ -362,6 +362,7 @@ TEST_F(TerrariumTest, TestPrepareTwoHums) {
 	updateTerrariumHumidity(10.0);
 	updateTerrariumHumidity(30.0);
 	updateTerrariumCO2(testCO2Value);
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -375,6 +376,7 @@ TEST_F(TerrariumTest, TestPrepareNoHum) {
 	bool check = true;
 	updateTerrariumTemperature(testTempValue);
 	updateTerrariumCO2(testCO2Value);
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -391,6 +393,7 @@ TEST_F(TerrariumTest, TestPrepareTwoTemps) {
 	updateTerrariumTemperature(20.0);
 	updateTerrariumHumidity(testHumValue);
 	updateTerrariumCO2(testCO2Value);
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -404,6 +407,7 @@ TEST_F(TerrariumTest, TestPrepareNoTemp) {
 	bool check = true;
 	updateTerrariumHumidity(testHumValue);
 	updateTerrariumCO2(testCO2Value);
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -420,6 +424,7 @@ TEST_F(TerrariumTest, TestPrepareTwoCO2s) {
 	updateTerrariumHumidity(testHumValue);
 	updateTerrariumCO2(300);
 	updateTerrariumCO2(400);
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -433,6 +438,7 @@ TEST_F(TerrariumTest, TestPrepareNoCO2) {
 	bool check = true;
 	updateTerrariumTemperature(testTempValue);
 	updateTerrariumHumidity(testHumValue);
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -447,7 +453,7 @@ TEST_F(TerrariumTest, TestPrepareWithNoFeed) {
 	updateTerrariumTemperature(testTempValue);
 	updateTerrariumHumidity(testHumValue);
 	updateTerrariumCO2(testCO2Value);
-	
+	updateTerrariumLight(testLightValue);
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
 	Terrariumdata_p returnData = prepareTerrariumData();
@@ -460,6 +466,7 @@ TEST_F(TerrariumTest, TestPrepareWithFeed) {
 	updateTerrariumTemperature(testTempValue);
 	updateTerrariumHumidity(testHumValue);
 	updateTerrariumCO2(testCO2Value);
+	updateTerrariumLight(testLightValue);
 	feedAnimalTerrarium();
 	pvPortMalloc_fake.return_val = malloc(sizeof(Terrariumdata));
 
