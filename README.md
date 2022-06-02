@@ -6,6 +6,7 @@ Det er gjort for at undgå problemer med linker i cpp.
 Commit historie og contribution graferne giver heller ikke et klart billede af arbejdsfordeling i dette repository.
 Det skyldes hovedsageligt at vi altid har kørt pair programming, og de to samme computere er blevet brugt hver gang.
 
-Map af navne:
-Bimmerlynge = Mathias Lynge
-BastianVIA = Bastian Marschall Thomsen
+| GitHub navn  | Rigtig navn |
+| ------------- | ------------- |
+| Bimmerlynge  | Mathias Lynge  |
+| BastianVIA  | Bastian Marschall Thomsen  |
